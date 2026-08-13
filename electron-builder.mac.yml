@@ -1,0 +1,47 @@
+# electron-builder.mac.yml —— macOS 独立构建配置
+# 与 package.json 里的 build（Windows）完全分离：--config 指定本文件时，
+# package.json 的 build 段被忽略，互不影响。
+#
+# 构建命令（在 dsh-desktop 目录下）：
+#   node node_modules/electron-builder/out/cli/cli.js --config electron-builder.mac.yml --mac zip --x64 --arm64
+# 产物：
+#   release/DeepSeek Harness-0.1.0-mac-arm64.zip  （Apple Silicon，M1/M2/M3/M4）
+#   release/DeepSeek Harness-0.1.0-mac-x64.zip     （Intel Mac）
+#
+# 说明：
+# - 未签名（identity: null）：首次打开需右键 → 打开，或在终端执行
+#   xattr -cr "/Applications/DeepSeek Harness.app"；必要时 ad-hoc 签名
+#   codesign --force --deep --sign - "/Applications/DeepSeek Harness.app"
+# - darwin 专属的原生模块（koffi / node-addon / ripgrep）与 Node 运行时由
+#   build/mac-after-pack.js 在打包后注入（npm 在 Windows 上只会安装 win32 变体）。
+
+appId: com.deepseek.dsh.desktop
+productName: DeepSeek Harness
+asar: false
+npmRebuild: false
+
+electronDownload:
+  mirror: https://npmmirror.com/mirrors/electron/
+  cache: ./.electron-cache
+
+directories:
+  output: release
+  buildResources: build
+
+files:
+  - main.js
+  - assets/**/*
+  - package.json
+
+mac:
+  icon: build/icon-1024.png
+  category: public.app-category.developer-tools
+  identity: null
+  target:
+    - target: zip
+      arch:
+        - x64
+        - arm64
+  artifactName: ${productName}-${version}-mac-${arch}.${ext}
+
+afterPack: build/mac-after-pack.js

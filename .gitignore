@@ -1,0 +1,11 @@
+node_modules/
+release/
+mac-native/
+electron-dist/
+node-runtime/
+.npmrc
+.npm-cache/
+.npm-logs/
+.builder-cache/
+.electron-cache/
+*.log

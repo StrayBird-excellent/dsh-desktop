@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<title>DeepSeek Harness</title>
+<style>
+  :root { color-scheme: dark; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { height: 100%; }
+  body {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 24px; background: #0d1117; color: #c9d1d9;
+    font-family: "Segoe UI", "Microsoft YaHei", system-ui, sans-serif;
+    user-select: none; -webkit-user-select: none;
+  }
+  .whale { width: 88px; height: 88px; animation: float 2.2s ease-in-out infinite; }
+  .ring {
+    width: 44px; height: 44px; border-radius: 50%;
+    border: 3px solid rgba(93, 124, 250, 0.25); border-top-color: #5d7cfa;
+    animation: spin 0.9s linear infinite;
+  }
+  .text { font-size: 15px; letter-spacing: 0.5px; color: #8b949e; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+</style>
+</head>
+<body>
+  <img class="whale" src="icon.png" alt="DeepSeek" draggable="false" />
+  <div class="ring"></div>
+  <div class="text">正在启动 DeepSeek Harness…</div>
+</body>
+</html>
