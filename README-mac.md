@@ -73,7 +73,8 @@ npm install --prefix mac-native --cache ..\.npm-cache --no-audit --no-fund --for
   @koromix/koffi-darwin-arm64@3.1.4 @koromix/koffi-darwin-x64@3.1.4 `
   node-addon-require-builtin-darwin-arm64@0.1.4 node-addon-require-builtin-darwin-x64@0.1.4 `
   @vscode/ripgrep-darwin-arm64@1.18.0 @vscode/ripgrep-darwin-x64@1.18.0 `
-  @img/sharp-darwin-arm64@0.35.3 @img/sharp-darwin-x64@0.35.3
+  @img/sharp-darwin-arm64@0.35.3 @img/sharp-darwin-x64@0.35.3 `
+  @img/sharp-libvips-darwin-arm64@1.3.2 @img/sharp-libvips-darwin-x64@1.3.2
 # 下载 node darwin 二进制到 node-runtime/darwin-{arm64,x64}/node（见 scripts/download.mjs）
 # 预解压 Electron darwin 发行包（符号链接→真实副本）：
 node scripts/extract-electron-zip.cjs <electron-darwin-arm64.zip> electron-dist/darwin-arm64

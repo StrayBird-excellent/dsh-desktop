@@ -11,6 +11,7 @@
 //   mac-native/node_modules/node-addon-require-builtin-darwin-<arch>
 //   mac-native/node_modules/@vscode/ripgrep-darwin-<arch>
 //   mac-native/node_modules/@img/sharp-darwin-<arch>（dsh-attachment-local 运行时图像处理）
+//   mac-native/node_modules/@img/sharp-libvips-darwin-<arch>（sharp 的 libvips 动态库）
 'use strict';
 
 const fs = require('node:fs');
@@ -71,6 +72,7 @@ module.exports = async function (context) {
     `node-addon-require-builtin-darwin-${arch}`,
     path.join('@vscode', `ripgrep-darwin-${arch}`),
     path.join('@img', `sharp-darwin-${arch}`),
+    path.join('@img', `sharp-libvips-darwin-${arch}`),
   ];
   for (const pkg of packages) {
     const src = path.join(nativeRoot, pkg);
