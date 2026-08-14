@@ -34,6 +34,9 @@ try {
   foreach ($f in $files) {
     $rel = $f.FullName.Substring($root.Length + 1).Replace('\', '/')
     if ($f.PSIsContainer) {
+      # ZIP directory entries must end in "/". Without it, macOS Archive
+      # Utility can extract entries such as Contents as zero-byte files.
+      $rel += '/'
       $mode = $modeDir
     } else {
       $ext = [System.IO.Path]::GetExtension($f.Name).ToLowerInvariant()
@@ -50,6 +53,7 @@ try {
     # bit pattern exceeds Int32.MaxValue. PowerShell casts are checked, so
     # reinterpret the raw bytes instead.
     $bits = ([uint32]$mode) -shl 16
+    if ($f.PSIsContainer) { $bits = $bits -bor 0x10 } # DOS directory attribute
     $entry.ExternalAttributes = [BitConverter]::ToInt32([BitConverter]::GetBytes($bits), 0)
     if (-not $f.PSIsContainer) {
       $in = [System.IO.File]::OpenRead($f.FullName)
